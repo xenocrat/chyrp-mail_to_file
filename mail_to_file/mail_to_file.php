@@ -10,7 +10,8 @@
 
             if (!file_exists(MAIN_DIR.DIR."digest.txt.php"))
                 if (!@file_put_contents(MAIN_DIR.DIR."digest.txt.php", $output))
-                    error(__("Error"), _f("Cannot write digest file <code>%s</code>", MAIN_DIR.DIR."digest.txt.php", "mail_to_file"));
+                    error(__("Error"),
+                          _f("Cannot write digest file <em>%s</em>", MAIN_DIR.DIR."digest.txt.php", "mail_to_file"));
         }
 
         static function __uninstall($confirm) {
