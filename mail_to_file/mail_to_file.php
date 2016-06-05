@@ -1,22 +1,20 @@
 <?php
     class MailToFile extends Modules {
         static function __install() {
-            $config = Config::current();
+            $digest = MAIN_DIR.DIR."digest.txt.php";
+            $output = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n".
+                      "MIME-Version: 1.0\r\n".
+                      "Content-Type: multipart/digest; boundary=\"---correspondence---\"\r\n".
+                      "\r\n---correspondence---\r\n";
 
-            $output = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-            $output.= "MIME-Version: 1.0\r\n";
-            $output.= "Content-Type: multipart/digest; boundary=\"---correspondence---\"\r\n";
-            $output.= "\r\n---correspondence---\r\n";
-
-            if (!file_exists(MAIN_DIR.DIR."digest.txt.php"))
-                if (!@file_put_contents(MAIN_DIR.DIR."digest.txt.php", $output))
-                    error(__("Error"),
-                          _f("Cannot write digest file <em>%s</em>", MAIN_DIR.DIR."digest.txt.php", "mail_to_file"));
+            if (!file_exists($digest) and !@file_put_contents($digest, $output))
+                error(__("Error"),
+                      _f("The digest file <em>%s</em> could not be created.", fix($digest), "mail_to_file"));
         }
 
         static function __uninstall($confirm) {
             if ($confirm)
-                @unlink(MAIN_DIR."/digest.txt.php");
+                @unlink(MAIN_DIR.DIR."digest.txt.php");
         }
 
         public function send_mail($function) {
