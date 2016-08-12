@@ -21,7 +21,7 @@
             return array('MailToFile', 'mail_digest');
         }
 
-        static function mail_digest($to, $subject, $message, $headers) {
+        public function mail_digest($to, $subject, $message, $headers) {
             $output = "\r\n".$headers."\r\n".
                       "To: ".$to."\r\n".
                       "Date: ".datetime()."\r\n".
