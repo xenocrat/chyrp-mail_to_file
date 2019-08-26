@@ -10,6 +10,10 @@ msgstr ""
 msgid "Redirects outgoing emails to a digest file."
 msgstr ""
 
+#: modules/mail_to_file/info.php:10
+msgid "Do you want to delete the digest file?"
+msgstr ""
+
 #: modules/mail_to_file/mail_to_file.php:12
 #, php-format
 msgid "The digest file <em>%s</em> could not be created."

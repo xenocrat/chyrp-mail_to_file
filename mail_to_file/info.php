@@ -7,5 +7,5 @@ return array(
     "author"        => array(
         "name"      => "Daniel Pimley",
         "url"       => "http://pimley.net/"),
-    "confirm"       => __("Do you want to delete the digest file?", "comments")
+    "confirm"       => __("Do you want to delete the digest file?", "mail_to_file")
 );
