@@ -1,6 +1,6 @@
 <?php
     class MailToFile extends Modules {
-        static function __install() {
+        static function __install(): void {
             $digest = MAIN_DIR.DIR."digest.txt.php";
             $output = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n".
                       "MIME-Version: 1.0\r\n".
@@ -12,7 +12,7 @@
                       _f("The digest file <em>%s</em> could not be created.", fix($digest), "mail_to_file"));
         }
 
-        static function __uninstall($confirm) {
+        static function __uninstall($confirm): void {
             if ($confirm)
                 @unlink(MAIN_DIR.DIR."digest.txt.php");
         }
@@ -21,7 +21,7 @@
             return array('MailToFile', 'mail_digest');
         }
 
-        static function mail_digest($to, $subject, $message, $headers) {
+        static function mail_digest($to, $subject, $message, $headers): bool {
             $output = "\r\n".$headers."\r\n".
                       "To: ".$to."\r\n".
                       "Date: ".datetime()."\r\n".
