@@ -7,9 +7,14 @@
                       "Content-Type: multipart/digest; boundary=\"---correspondence---\"\r\n".
                       "\r\n---correspondence---\r\n";
 
-            if (!file_exists($digest) and !@file_put_contents($digest, $output))
-                error(__("Error"),
-                      _f("The digest file <em>%s</em> could not be created.", fix($digest), "mail_to_file"));
+            if (!file_exists($digest) and !@file_put_contents($digest, $output)) {
+                $str = fix($digest);
+
+                error(
+                    __("Error"),
+                    _f("The digest file <em>%s</em> could not be created.", $str, "mail_to_file")
+                );
+            }
         }
 
         static function __uninstall($confirm): void {
@@ -29,7 +34,13 @@
                       $message."\r\n\r\n".
                       "---correspondence---\r\n";
 
-            if (@file_put_contents(MAIN_DIR.DIR."digest.txt.php", $output, FILE_APPEND))
+            if (
+                @file_put_contents(
+                    MAIN_DIR.DIR."digest.txt.php",
+                    $output,
+                    FILE_APPEND
+                )
+            )
                 return true;
             else
                 return false;
