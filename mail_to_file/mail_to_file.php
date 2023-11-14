@@ -27,6 +27,16 @@
         }
 
         static function mail_digest($to, $subject, $message, $headers): bool {
+            if (is_array($headers)) {
+                $combined = array();
+
+                foreach ($headers as $key => $value) {
+                    $combined[] = $key.": ".$value;
+                }
+
+                $headers = implode("\r\n", $combined);
+            }
+
             $output = "\r\n".$headers."\r\n".
                       "To: ".$to."\r\n".
                       "Date: ".datetime()."\r\n".
