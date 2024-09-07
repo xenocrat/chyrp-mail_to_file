@@ -17,16 +17,25 @@
             }
         }
 
-        static function __uninstall($confirm): void {
+        static function __uninstall(
+            $confirm
+        ): void {
             if ($confirm)
                 @unlink(MAIN_DIR.DIR."digest.txt.php");
         }
 
-        public function send_mail($function) {
+        public function send_mail(
+            $function
+        ) {
             return array('MailToFile', 'mail_digest');
         }
 
-        static function mail_digest($to, $subject, $message, $headers): bool {
+        static function mail_digest(
+            $to,
+            $subject,
+            $message,
+            $headers
+        ): bool {
             if (is_array($headers)) {
                 $combined = array();
 
