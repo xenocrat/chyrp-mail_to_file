@@ -1,6 +1,7 @@
 <?php
     class MailToFile extends Modules {
-        static function __install(): void {
+        static function __install(
+        ): void {
             $digest = MAIN_DIR.DIR."digest.txt.php";
             $output = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n".
                       "MIME-Version: 1.0\r\n".
